@@ -5,6 +5,8 @@ package com.myapp.actiondriver;
 
 import java.io.File;
 import java.time.Duration;
+import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -401,5 +403,156 @@ public class Action extends BaseClass {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+	
+	public boolean draggable(WebDriver driver, WebElement source, int x, int y) {
+		boolean flag = false;
+		try {
+			new Actions(driver).dragAndDropBy(source, x, y).build().perform();
+			flag = true;
+			return true;
+		}catch (Exception e){
+			return false;
+		}finally {
+			if (flag) {
+				System.out.println("Draggable Action is performed on \""+source+"\"");			
+			} else if(!flag) {
+				System.out.println("Draggable action is not performed on \""+source+"\"");
+			}
+		}
+	}
+	
+	public boolean draganddrop(WebDriver driver, WebElement source, WebElement target) {
+		boolean flag = false;
+		try {
+			new Actions(driver).dragAndDrop(source, target).build().perform();
+			flag = true;
+			return true;
+		} catch (Exception e) {
+			return false;
+		}finally {
+			if(flag) {
+				System.out.println("Drag and Drop action is performed");
+			}else {
+				System.out.println("Drag and Drop action is not performed");
+			}
+		}
+	}
+	
+	public boolean slider(WebDriver driver, WebElement ele, int x, int y) {
+		boolean flag = false;
+		try {
+			new Actions(driver).dragAndDropBy(ele, x, y).build().perform();
+			Thread.sleep(5000);
+			flag = true;
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			if(flag) {
+				System.out.println("Slider action is performed");
+			}else {
+				System.out.println("Slider action is not performed");
+			}	
+		}
+	}
+	
+	public boolean rightClick(WebDriver driver, WebElement ele) {
+		boolean flag = false;
+		try {
+			Actions action = new Actions(driver);
+			flag = true;
+			return true;
+		} catch (Exception e) {
+			return false;
+		}finally {
+			if(flag) {
+				System.out.println("Right Click action is performed");
+			}else {
+				System.out.println("Right Click action is not performed");
+			}
+		}
+	}
+	
+	public boolean switchWindowByTitle(WebDriver driver, String windowTitle, int count) {
+		boolean flag = false;
+		try {
+			Set<String> windowList = driver.getWindowHandles();
+			String[] array = windowList.toArray(new String[0]);
+			driver.switchTo().window(array[count-1]);
+			
+			if(driver.getTitle().contains(windowTitle)) {
+				return true;
+			}else {
+			    return false;	
+			}
+		} catch (Exception e) {
+			return false;
+		}finally {
+			if(flag) {
+				System.out.println("Navigated to the window with Title");
+			}else {
+				System.out.println("The Window with the title is not selected");
+			}
+		}
+	}
+	
+	public boolean switchToNewWindow(WebDriver driver) {
+		boolean flag = false;
+		try {
+			Set<String> set = driver.getWindowHandles();
+			Object[] popup = set.toArray();
+			driver.switchTo().window(popup[1].toString());
+			
+			flag = true;
+			return true;
+		} catch (Exception e) {
+			return false;
+		}finally {
+			if(flag) {
+				System.out.println("Window is Navigated with title");
+			}else {
+				System.out.println("The Window with title: is not Selected");
+			}
+		}
+	}
+	
+	public boolean switchToOldWindow(WebDriver driver) {
+		boolean flag = false;
+		try {
+			Set<String> set = driver.getWindowHandles();
+			Object[] popup = set.toArray();
+			driver.switchTo().window(popup[0].toString());
+			
+			flag = true;
+			return true;
+		} catch (Exception e) {
+			return false;
+		}finally {
+			if(flag) {
+			    System.out.println("Focus navigated to the window with title");	
+			}else {
+				System.out.println("The Window with title: is not Selected");
+			}
+		}
+	}
+	
+	public int getColumnCount(WebElement col) {
+		List<WebElement> columns = col.findElements(By.tagName("td"));
+		int colSize = columns.size();
+		System.out.println(columns.size());
+		
+		for(WebElement column: columns) {
+			System.out.print(column.getText());
+			System.out.print("|");
+		}
+		return colSize;
+	}
+	
+	public int getRowCount(WebElement row) {
+		List<WebElement> rows = row.findElements(By.tagName("tr"));
+		int rowSize = rows.size()-1;
+		return rowSize;
 	}
 }
