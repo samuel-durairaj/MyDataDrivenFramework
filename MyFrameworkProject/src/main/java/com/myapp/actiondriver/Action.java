@@ -4,20 +4,31 @@
 package com.myapp.actiondriver;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.myapp.base.BaseClass;
+
 
 /**
  * @author Samuel Durairaj added on 13th March2019
@@ -554,5 +565,149 @@ public class Action extends BaseClass {
 		List<WebElement> rows = row.findElements(By.tagName("tr"));
 		int rowSize = rows.size()-1;
 		return rowSize;
+	}
+	
+	/**
+	 * Verify alert present or not
+	 * 
+	 * @return: Boolean (True: If alert preset, False: If no alert)
+	 * 
+	 */
+	
+	public boolean Alert(WebDriver driver) {
+		boolean presentFlag = false;
+		Alert alert = null;
+
+		try {
+			//Check the presence of alert
+			alert = driver.switchTo().alert();
+			//if present consume the alert
+			alert.accept();
+			presentFlag = true;
+		} catch (NoAlertPresentException ex) {
+			// Alert present; set the flag
+
+			// Alert not present
+			ex.printStackTrace();
+		} finally {
+			if (!presentFlag) {
+				System.out.println("The Alert is handled successfully");		
+			} else{
+				System.out.println("There was no alert to handle");
+			}
+		}
+
+		return presentFlag;
+	}
+	
+	public boolean launchUrl(WebDriver driver, String url) {
+		boolean flag = false;
+		try {
+			driver.navigate().to(url);
+			flag = true;
+			return true;
+		} catch (Exception e) {
+			return false;
+		}finally {
+			if (flag) {
+				System.out.println("Successfully launched \""+url+"\"");				
+			} else {
+				System.out.println("Failed to launch \""+url+"\"");
+			}
+		}
+	}
+	
+	public boolean isAlertPresent() {
+		try {
+			driver.switchTo().alert();
+			return true;
+		} catch (NoAlertPresentException Ex) {
+			return false;
+		}
+	}
+	
+	public String getTitle(WebDriver driver) {
+		boolean flag = false;
+		
+		String text = driver.getTitle();
+		if(flag) {
+			System.out.println("Title of the page is: \""+text+"\"");
+		}
+		return text;
+	}
+	
+	public String getCurrentUrl(WebDriver driver) {
+		boolean flag = false;
+		
+		String text = driver.getCurrentUrl();
+		if(flag) {
+			System.out.println("Current URL is: \""+text+"\"");
+		}
+		return text;
+	}
+	
+	public boolean click1(WebElement locator, String locatorName) {
+		boolean flag = false;
+		try {
+			locator.click();
+			flag = true;
+			return true;
+		} catch (Exception e) {
+			return false;
+		}finally {
+			if (flag) {
+				System.out.println("Able to click on \""+locatorName+"\"");
+			} else {
+				System.out.println("Click Unable to click on \""+locatorName+"\"");
+			}
+		}
+	}
+	
+	public void fluentWait(WebDriver driver, WebElement element, int timeOut) {
+		Wait<WebDriver> wait = null;
+		try {
+			wait = new FluentWait<WebDriver>((WebDriver) driver)
+					   .withTimeout(Duration.ofSeconds(20))
+					   .pollingEvery(Duration.ofSeconds(2))
+					   .ignoring(Exception.class);
+			wait.until(ExpectedConditions.visibilityOf(element));
+			element.click();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void implicitWait(WebDriver driver, int timeOut) {
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	}
+	
+	public void explicitWait(WebDriver driver, WebElement element, Duration timeOut) {
+		WebDriverWait wait = new WebDriverWait(driver,timeOut);
+		wait.until(ExpectedConditions.visibilityOf(element));
+	}
+	
+	public void pageLoadTimeOut(WebDriver driver, int timeOut) {
+		driver.manage().timeouts().pageLoadTimeout(timeOut, TimeUnit.SECONDS);
+	}
+	
+	public String screenShot(WebDriver driver, String filename) {
+		String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+		TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+		File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
+		String destination = System.getProperty("user.dir") + "\\ScreenShots\\" + filename + "_" + dateName + ".png";
+		
+		try {
+			FileUtils.copyFile(source, new File(destination));
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		String newImageString = "http://localhost:8082/job/MyStoreProject/ws/MyStoreProject/ScreenShots/" + filename + "_"
+				+ dateName + ".png";
+		return newImageString;
+	}
+	
+	public String getCurrentTime() {
+		String currentDate = new SimpleDateFormat("yyyy-MM-dd-hhmmss").format(new Date());
+	    return currentDate;
 	}
 }
