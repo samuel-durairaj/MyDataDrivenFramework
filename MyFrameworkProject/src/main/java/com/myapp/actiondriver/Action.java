@@ -47,7 +47,7 @@ public class Action extends BaseClass {
 		act.moveToElement(ele).click().build().perform();
 	}
 	
-	public boolean findElement(WebDriver driver, WebElement ele) {
+	public static boolean findElement(WebDriver driver, WebElement ele) {
 		boolean flag = false;
 		try {
 			ele.isDisplayed();
@@ -65,7 +65,7 @@ public class Action extends BaseClass {
 		return flag;
 	}
 	
-	public boolean isDisplayed(WebDriver driver, WebElement ele) {
+	public static boolean isDisplayed(WebDriver driver, WebElement ele) {
 		boolean flag = false;
 		flag = findElement(driver,ele);
 		if(flag) {
@@ -81,7 +81,7 @@ public class Action extends BaseClass {
 		return flag;
 	}
 	
-	public boolean isSelected(WebDriver driver, WebElement ele) {
+	public static boolean isSelected(WebDriver driver, WebElement ele) {
 		boolean flag = false;
 		flag = findElement(driver,ele);
 		if(flag) {
@@ -97,7 +97,7 @@ public class Action extends BaseClass {
 		return flag;
 	}
 	
-	public boolean isEnabled(WebDriver driver, WebElement ele) {
+	public static boolean isEnabled(WebDriver driver, WebElement ele) {
 		boolean flag = false;
 		flag = findElement(driver, ele);
 		if(flag) {
@@ -121,7 +121,7 @@ public class Action extends BaseClass {
 	 * @return - true/false
 	 */
 	
-	public boolean type(WebElement ele, String text) {
+	public static boolean type(WebElement ele, String text) {
 		boolean flag = false;
 		try {
 			flag = ele.isDisplayed();
@@ -141,7 +141,7 @@ public class Action extends BaseClass {
 		return flag;
 	}
 	
-	public boolean selectBySendKeys(WebElement ele, String value) {
+	public static boolean selectBySendKeys(WebElement ele, String value) {
 		boolean flag = false;
 		try {
 			ele.sendKeys(value);
@@ -171,7 +171,7 @@ public class Action extends BaseClass {
 	 * 
 	 */
 	
-	public boolean selectByIndex(WebElement ele, int index) {
+	public static boolean selectByIndex(WebElement ele, int index) {
 		boolean flag = false;
 		try {
 			Select s = new Select(ele);
@@ -201,7 +201,7 @@ public class Action extends BaseClass {
 	 *                    Listbox etc..)
 	 */
 	
-	public boolean selectByValue(WebElement ele, String value) {
+	public static boolean selectByValue(WebElement ele, String value) {
 		boolean flag = false;
 		try {
 			Select s = new Select(ele);
@@ -232,7 +232,7 @@ public class Action extends BaseClass {
 	 *                    Listbox etc..)
 	 */
 	
-	public boolean selectByVisibleText(WebElement ele, String visibleText) {
+	public static boolean selectByVisibleText(WebElement ele, String visibleText) {
 		boolean flag = false;
 		try {
 			Select s = new Select(ele);
@@ -250,7 +250,7 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public boolean mouseHoverByJavaScript(WebElement ele) {
+	public static boolean mouseHoverByJavaScript(WebElement ele) {
 		boolean flag = false;
 		try {
 			WebElement mo = ele;
@@ -273,7 +273,7 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public boolean JSClick(WebElement ele, WebDriver driver) throws Exception {
+	public static boolean JSClick(WebElement ele, WebDriver driver) throws Exception {
 		boolean flag = false;
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -290,7 +290,7 @@ public class Action extends BaseClass {
 		return flag;
 	}
 	
-	public boolean switchToFramByIndex(WebDriver driver, int index) {
+	public static boolean switchToFramByIndex(WebDriver driver, int index) {
 		boolean flag = false;
 		try {
 			new WebDriverWait(driver, Duration.ofSeconds(15)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe")));
@@ -315,7 +315,7 @@ public class Action extends BaseClass {
 	 * 
 	 */
 	
-	public boolean switchToFramByID(WebDriver driver, String idValue) {
+	public static boolean switchToFramByID(WebDriver driver, String idValue) {
 		boolean flag = false;
 		try {
 		driver.switchTo().frame(idValue);
@@ -340,7 +340,7 @@ public class Action extends BaseClass {
 	 * 
 	 */
 	
-	public boolean switchToFrameByName(WebDriver driver, String nameValue) {
+	public static boolean switchToFrameByName(WebDriver driver, String nameValue) {
 		boolean flag = false;
 		try {
 			driver.switchTo().frame(nameValue);
@@ -357,7 +357,7 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public boolean switchToDefaultFrame(WebDriver driver, WebElement ele) {
+	public static boolean switchToDefaultFrame(WebDriver driver, WebElement ele) {
 		boolean flag = false;
 		try {
 			driver.switchTo().defaultContent();
@@ -374,7 +374,7 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public void mouseOverElement(WebDriver driver, WebElement ele) {
+	public static void mouseOverElement(WebDriver driver, WebElement ele) {
 		boolean flag = false;
 		try {
 			new Actions(driver).moveToElement(ele).build().perform();
@@ -390,7 +390,7 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public boolean moveToElement(WebDriver driver, WebElement ele) {
+	public static boolean moveToElement(WebDriver driver, WebElement ele) {
 		boolean flag = false;
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -405,7 +405,7 @@ public class Action extends BaseClass {
 		return flag;
 	}
 	
-	public boolean mouseover(WebDriver driver, WebElement ele) {
+	public static boolean mouseover(WebDriver driver, WebElement ele) {
 		boolean flag = false;
 		try {
 			new Actions(driver).moveToElement(ele).build().perform();
@@ -416,7 +416,7 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public boolean draggable(WebDriver driver, WebElement source, int x, int y) {
+	public static boolean draggable(WebDriver driver, WebElement source, int x, int y) {
 		boolean flag = false;
 		try {
 			new Actions(driver).dragAndDropBy(source, x, y).build().perform();
@@ -433,7 +433,7 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public boolean draganddrop(WebDriver driver, WebElement source, WebElement target) {
+	public static boolean draganddrop(WebDriver driver, WebElement source, WebElement target) {
 		boolean flag = false;
 		try {
 			new Actions(driver).dragAndDrop(source, target).build().perform();
@@ -450,7 +450,7 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public boolean slider(WebDriver driver, WebElement ele, int x, int y) {
+	public static boolean slider(WebDriver driver, WebElement ele, int x, int y) {
 		boolean flag = false;
 		try {
 			new Actions(driver).dragAndDropBy(ele, x, y).build().perform();
@@ -469,7 +469,7 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public boolean rightClick(WebDriver driver, WebElement ele) {
+	public static boolean rightClick(WebDriver driver, WebElement ele) {
 		boolean flag = false;
 		try {
 			Actions action = new Actions(driver);
@@ -486,7 +486,7 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public boolean switchWindowByTitle(WebDriver driver, String windowTitle, int count) {
+	public static boolean switchWindowByTitle(WebDriver driver, String windowTitle, int count) {
 		boolean flag = false;
 		try {
 			Set<String> windowList = driver.getWindowHandles();
@@ -509,7 +509,7 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public boolean switchToNewWindow(WebDriver driver) {
+	public static boolean switchToNewWindow(WebDriver driver) {
 		boolean flag = false;
 		try {
 			Set<String> set = driver.getWindowHandles();
@@ -529,7 +529,7 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public boolean switchToOldWindow(WebDriver driver) {
+	public static boolean switchToOldWindow(WebDriver driver) {
 		boolean flag = false;
 		try {
 			Set<String> set = driver.getWindowHandles();
@@ -549,7 +549,7 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public int getColumnCount(WebElement col) {
+	public static int getColumnCount(WebElement col) {
 		List<WebElement> columns = col.findElements(By.tagName("td"));
 		int colSize = columns.size();
 		System.out.println(columns.size());
@@ -561,7 +561,7 @@ public class Action extends BaseClass {
 		return colSize;
 	}
 	
-	public int getRowCount(WebElement row) {
+	public static int getRowCount(WebElement row) {
 		List<WebElement> rows = row.findElements(By.tagName("tr"));
 		int rowSize = rows.size()-1;
 		return rowSize;
@@ -574,7 +574,7 @@ public class Action extends BaseClass {
 	 * 
 	 */
 	
-	public boolean Alert(WebDriver driver) {
+	public static boolean Alert(WebDriver driver) {
 		boolean presentFlag = false;
 		Alert alert = null;
 
@@ -600,7 +600,7 @@ public class Action extends BaseClass {
 		return presentFlag;
 	}
 	
-	public boolean launchUrl(WebDriver driver, String url) {
+	public static boolean launchUrl(WebDriver driver, String url) {
 		boolean flag = false;
 		try {
 			driver.navigate().to(url);
@@ -617,7 +617,7 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public boolean isAlertPresent() {
+	public static boolean isAlertPresent() {
 		try {
 			driver.switchTo().alert();
 			return true;
@@ -626,7 +626,7 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public String getTitle(WebDriver driver) {
+	public static String getTitle(WebDriver driver) {
 		boolean flag = false;
 		
 		String text = driver.getTitle();
@@ -636,7 +636,7 @@ public class Action extends BaseClass {
 		return text;
 	}
 	
-	public String getCurrentUrl(WebDriver driver) {
+	public static String getCurrentUrl(WebDriver driver) {
 		boolean flag = false;
 		
 		String text = driver.getCurrentUrl();
@@ -646,7 +646,7 @@ public class Action extends BaseClass {
 		return text;
 	}
 	
-	public boolean click1(WebElement locator, String locatorName) {
+	public static boolean click1(WebElement locator, String locatorName) {
 		boolean flag = false;
 		try {
 			locator.click();
@@ -663,7 +663,7 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public void fluentWait(WebDriver driver, WebElement element, int timeOut) {
+	public static void fluentWait(WebDriver driver, WebElement element, int timeOut) {
 		Wait<WebDriver> wait = null;
 		try {
 			wait = new FluentWait<WebDriver>((WebDriver) driver)
@@ -677,22 +677,22 @@ public class Action extends BaseClass {
 		}
 	}
 	
-	public void implicitWait(WebDriver driver, int timeOut) {
+	public static void implicitWait(WebDriver driver, int timeOut) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
-	public void explicitWait(WebDriver driver, WebElement element, Duration timeOut) {
+	public static void explicitWait(WebDriver driver, WebElement element, Duration timeOut) {
 		WebDriverWait wait = new WebDriverWait(driver,timeOut);
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
 	
-	public void pageLoadTimeOut(WebDriver driver, int timeOut) {
+	public static void pageLoadTimeOut(WebDriver driver, int timeOut) {
 		driver.manage().timeouts().pageLoadTimeout(timeOut, TimeUnit.SECONDS);
 	}
 	
-	public String screenShot(WebDriver driver, String filename) {
+	public static String screenShot(WebDriver driver, String filename) {
 		String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-		TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+		TakesScreenshot takesScreenshot = (TakesScreenshot)driver;
 		File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
 		String destination = System.getProperty("user.dir") + "\\ScreenShots\\" + filename + "_" + dateName + ".png";
 		
@@ -706,7 +706,7 @@ public class Action extends BaseClass {
 		return newImageString;
 	}
 	
-	public String getCurrentTime() {
+	public static String getCurrentTime() {
 		String currentDate = new SimpleDateFormat("yyyy-MM-dd-hhmmss").format(new Date());
 	    return currentDate;
 	}

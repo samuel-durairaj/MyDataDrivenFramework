@@ -11,6 +11,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.BeforeTest;
 
+import com.myapp.actiondriver.Action;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
@@ -32,15 +34,20 @@ public class BaseClass {
 	}
 	
 	public static void launchApp() {
-		WebDriverManager.chromedriver().setup();
+		//WebDriverManager.chromedriver().setup();
 		String browserName = prop.getProperty("browser");
 		
 		if(browserName.contains("Chrome")) {
+			System.setProperty(browserName, "C:\\Drivers\\chromedriver.exe");
 			driver = new ChromeDriver();
 		}else if (browserName.contains("FireFox")) {
 			driver = new FirefoxDriver();
 		}else if (browserName.contains("IE")) {
 			driver = new InternetExplorerDriver();
 		}
+		Action.implicitWait(driver, 10);
+		Action.pageLoadTimeOut(driver, 30);
+		driver.get(prop.getProperty("url"));
+		driver.manage().window().maximize();
 	}
 }
