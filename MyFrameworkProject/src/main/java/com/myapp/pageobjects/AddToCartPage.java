@@ -19,11 +19,11 @@ public class AddToCartPage extends BaseClass {
 	WebElement TotalPrice;
 	
 	public AddToCartPage() {
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(getDriver(), this);
 	}
 	
 	public CheckoutPage proceedCheckoutButton() {
-		Action.click(driver, ProceedCheckoutButton);
+		Action.click(getDriver(), ProceedCheckoutButton);
 		return new CheckoutPage();
 	}
 	

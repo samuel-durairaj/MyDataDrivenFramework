@@ -13,10 +13,10 @@ public class AccountCreationPage extends BaseClass{
 	WebElement AccountCreationHeaderTitle;
 	
 	public AccountCreationPage() {
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(getDriver(), this);
 	}
 	
 	public boolean accountCreationHeaderTitle() throws Throwable {
-		return Action.isDisplayed(driver, AccountCreationHeaderTitle);
+		return Action.isDisplayed(getDriver(), AccountCreationHeaderTitle);
 	}
 }

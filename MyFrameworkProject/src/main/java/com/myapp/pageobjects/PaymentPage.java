@@ -28,7 +28,7 @@ public class PaymentPage extends BaseClass {
 	WebElement PayAndConfirmOrder;
 	
 	public PaymentPage() {
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(getDriver(), this);
 	}
 	
 	public void enterCardDetails(String nameOnCard, String cardNumber, String cvvNumber, String expiryMonth, String expiryYear) {
@@ -40,7 +40,7 @@ public class PaymentPage extends BaseClass {
 	}
 	
 	public OrderConfirmationPage clickPayAndConformOrder() {
-		Action.click(driver, PayAndConfirmOrder);
+		Action.click(getDriver(), PayAndConfirmOrder);
 		return new OrderConfirmationPage();
 	}
 }

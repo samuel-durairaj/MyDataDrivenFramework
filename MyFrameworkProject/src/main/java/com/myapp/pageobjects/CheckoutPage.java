@@ -13,10 +13,10 @@ public class CheckoutPage extends BaseClass {
 	WebElement PlaceOrderButton;
 	
 	public CheckoutPage() {
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(getDriver(), this);
 	}
 	
 	public void clickPlaceOrderButton() {
-		Action.click(driver, PlaceOrderButton);
+		Action.click(getDriver(), PlaceOrderButton);
 	}
 }

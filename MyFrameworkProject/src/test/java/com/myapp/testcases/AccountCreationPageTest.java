@@ -6,15 +6,15 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.myapp.base.BaseClass;
-import com.myapp.pageobjects.HomePage;
+import com.myapp.pageobjects.AccountCreationPage;
 import com.myapp.pageobjects.IndexPage;
 import com.myapp.pageobjects.LoginPage;
 
-public class LoginPageTest extends BaseClass{
+public class AccountCreationPageTest extends BaseClass{
 
 	IndexPage indexPage;
 	LoginPage loginPage;
-	HomePage homePage;
+	AccountCreationPage accountCreationPage;
 	
 	@BeforeMethod
 	public void setUp() {
@@ -26,13 +26,12 @@ public class LoginPageTest extends BaseClass{
 		getDriver().quit();
 	}
 	
-	@Test
-	public void loginTest() throws Throwable {
+	@Test 
+	public void verifyCreateAccountPageTest() throws Throwable {
 		indexPage = new IndexPage();
-		loginPage=indexPage.clickOnSignIn();
-		homePage=loginPage.login(prop.getProperty("username"), prop.getProperty("password"));
-		String actualURL = homePage.getCurrURL();
-		String expectedURL = "https://www.automationexercise.com/";
-		Assert.assertEquals(actualURL, expectedURL);
+		loginPage = indexPage.clickOnSignIn();
+		accountCreationPage = loginPage.signUp("samuel", "samuel86@mail.com");
+		boolean result = accountCreationPage.accountCreationHeaderTitle();
+		Assert.assertTrue(result);
 	}
 }

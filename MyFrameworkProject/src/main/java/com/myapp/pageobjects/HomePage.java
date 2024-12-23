@@ -15,29 +15,29 @@ public class HomePage extends BaseClass{
 	@FindBy(xpath="//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[2]/a")
 	WebElement ProductsLink;
 	
-	@FindBy(xpath="//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[10]/a/text()")
+	@FindBy(xpath="//a[text()=' Logged in as ']")
 	WebElement LoggedAsUserLabel;
 	
 	public HomePage() {
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(getDriver(), this);
 	}
 
 	public LoginPage clickLogoutButton() throws Throwable {
-		Action.click(driver, LogoutButton);
+		Action.click(getDriver(), LogoutButton);
 		return new LoginPage();
 	}
 	   
     public SearchResultPage ClickProductsLink() throws Throwable{
-    	Action.click(driver, ProductsLink);
+    	Action.click(getDriver(), ProductsLink);
     	return new SearchResultPage();
     }
     
     public boolean loggedInAsUserLabel() throws Throwable {
-    	return Action.isDisplayed(driver, LoggedAsUserLabel);
+    	return Action.isDisplayed(getDriver(), LoggedAsUserLabel);
     }
     
     public String getCurrURL() {
-    	String currentURL = driver.getCurrentUrl();
+    	String currentURL = getDriver().getCurrentUrl();
     	return currentURL;
     }
 }

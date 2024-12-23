@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.BeforeTest;
 
 import com.myapp.actiondriver.Action;
@@ -17,8 +18,16 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
 
-	public static WebDriver driver;
+	//public static WebDriver driver;
 	public static Properties prop;
+	
+	//Declare ThreadLocal Driver
+	public static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<RemoteWebDriver>();
+	
+	public static WebDriver getDriver() {
+		//Get Driver from thread local camp
+		return driver.get();
+	}
 	
 	@BeforeTest
 	public void loadConfig() {
@@ -39,15 +48,21 @@ public class BaseClass {
 		
 		if(browserName.contains("Chrome")) {
 			System.setProperty(browserName, "C:\\Drivers\\chromedriver.exe");
-			driver = new ChromeDriver();
+			//driver = new ChromeDriver();
+			//Set Browser to ThreadLocalCamp
+			driver.set(new ChromeDriver());
 		}else if (browserName.contains("FireFox")) {
-			driver = new FirefoxDriver();
+			//driver = new FirefoxDriver();
+			//Set Browser to ThreadLocalCamp
+			driver.set(new FirefoxDriver());
 		}else if (browserName.contains("IE")) {
-			driver = new InternetExplorerDriver();
+			//driver = new InternetExplorerDriver();
+			//Set Browser to ThreadLocalCamp
+			driver.set(new InternetExplorerDriver());
 		}
-		Action.implicitWait(driver, 10);
-		Action.pageLoadTimeOut(driver, 30);
-		driver.get(prop.getProperty("url"));
-		driver.manage().window().maximize();
+		Action.implicitWait(getDriver(), 10);
+		Action.pageLoadTimeOut(getDriver(), 30);
+		getDriver().get(prop.getProperty("url"));
+		getDriver().manage().window().maximize();
 	}
 }

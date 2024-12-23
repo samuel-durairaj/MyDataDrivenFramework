@@ -15,7 +15,7 @@ public class SearchResultPage extends BaseClass {
 	@FindBy(xpath="//*[@id='submit_search']")
 	WebElement SubmitSearch;
 	
-	@FindBy(xpath="/html/body/section[2]/div[1]/div/div[2]/div/div[3]/div/div[1]/div[2]/div/p")
+	@FindBy(xpath="/html/body/section[2]/div[1]/div/div[2]/div/div[2]/div/div[1]/div[1]/p")
 	WebElement MenTShirtProduct;
 	
 	@FindBy(xpath="//*[@id=\"cartModal\"]/div/div/div[2]/p[2]/a/u")
@@ -25,11 +25,11 @@ public class SearchResultPage extends BaseClass {
 	WebElement AddToCartConfirmationMessage;
 	
 	public SearchResultPage() {
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(getDriver(), this);
 	}
     
-	public boolean searchWaterMarkLabel() {
-		return Action.isDisplayed(driver, SearchWatermarkText);
+	public boolean isSearchWaterMarkLabel() {
+		return Action.isDisplayed(getDriver(), SearchWatermarkText);
 	}
 	
 	public void enterSearchText(String enterText) {
@@ -37,23 +37,27 @@ public class SearchResultPage extends BaseClass {
 	}
 	
 	public void clickSubmitSearch() {
-		Action.click(driver, SubmitSearch);
+		Action.click(getDriver(), SubmitSearch);
+	}
+	
+	public void mouseHoverTheProduct() {
+		Action.mouseover(getDriver(), MenTShirtProduct);
 	}
 	
 	public AddToCartPage clickViewCartModal() throws Throwable {
-		Action.click(driver, ViewCartModal);
+		Action.click(getDriver(), ViewCartModal);
 		return new AddToCartPage();
 	}
 	
-	public boolean isProductAvailable(WebElement MenTShirtProduct) throws Throwable{
-		return Action.isDisplayed(driver, MenTShirtProduct);
+	public boolean isProductAvailable() throws Throwable{
+		return Action.isDisplayed(getDriver(), MenTShirtProduct);
 	}
 	
 	public void clickOnProduct() throws Throwable{
-		Action.click(driver, MenTShirtProduct);
+		Action.click(getDriver(), MenTShirtProduct);
 	}
 	
 	public boolean addToCartConfirmationMessage() {
-		return Action.isDisplayed(driver, AddToCartConfirmationMessage);
+		return Action.isDisplayed(getDriver(), AddToCartConfirmationMessage);
 	}
 }

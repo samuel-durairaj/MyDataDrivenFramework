@@ -19,20 +19,20 @@ public class IndexPage extends BaseClass{
     
     //Using Constructor to initialise the webelements
     public IndexPage() {
-    	PageFactory.initElements(driver, this);
+    	PageFactory.initElements(getDriver(), this);
     }
     
     public boolean validateLogo() throws Throwable{
-    	return Action.isDisplayed(driver, HomePageLogo);
+    	return Action.isDisplayed(getDriver(), HomePageLogo);
     }
     
     public String getHomePageTitle() {
-    	String homePageTitle = driver.getTitle();
+    	String homePageTitle = getDriver().getTitle();
     	return homePageTitle;
     }
     
     public LoginPage clickOnSignIn() throws Throwable{
-    	Action.click(driver, LoginOrSignUpButton);
+    	Action.click(getDriver(), LoginOrSignUpButton);
     	return new LoginPage();
     }
 }

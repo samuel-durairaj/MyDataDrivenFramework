@@ -619,7 +619,7 @@ public class Action extends BaseClass {
 	
 	public static boolean isAlertPresent() {
 		try {
-			driver.switchTo().alert();
+			getDriver().switchTo().alert();
 			return true;
 		} catch (NoAlertPresentException Ex) {
 			return false;

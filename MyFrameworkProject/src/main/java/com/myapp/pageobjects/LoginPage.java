@@ -1,3 +1,4 @@
+
 /**
  * 
  */
@@ -27,25 +28,25 @@ public class LoginPage extends BaseClass {
 	    @FindBy(xpath="//*[@id=\"form\"]/div/div/div[3]/div/form/input[3]")
 	    WebElement EmailForSignUp;
 	    
-	    @FindBy(xpath="//*[@id=\"form\"]/div/div/div[3]/div/form/input[4]")
+	    @FindBy(xpath="//*[@id=\"form\"]/div/div/div[3]/div/form/button")
 	    WebElement SignUpButton;
 	
 	    //Constructors to Initialise the WebElements
 	    public LoginPage() {
-	    	PageFactory.initElements(driver, this);
+	    	PageFactory.initElements(getDriver(), this);
 	    }
 	    
 	    public HomePage login(String username, String password) throws Throwable {
 	    	Action.type(Username, username);
 	    	Action.type(Password, password);
-	    	Action.click(driver, LoginButton);
+	    	Action.click(getDriver(), LoginButton);
             return new HomePage();
 	    }
 	    
 	    public AccountCreationPage signUp(String name, String emailID) throws Throwable{
 	    	Action.type(NameForSignUp, name);
 	    	Action.type(EmailForSignUp, emailID);
-	    	Action.click(driver, SignUpButton);
+	    	Action.click(getDriver(), SignUpButton);
 	    	return new AccountCreationPage();
 	    }
 }
