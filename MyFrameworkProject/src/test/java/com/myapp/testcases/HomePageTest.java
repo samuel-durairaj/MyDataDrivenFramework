@@ -17,8 +17,8 @@ public class HomePageTest extends BaseClass {
 	HomePage homePage;
 	
 	@BeforeMethod
-	public void setUp() {
-		launchApp();
+	public void setUp(String browser) {
+		launchApp(browser);
 	}
 	
 	@AfterMethod

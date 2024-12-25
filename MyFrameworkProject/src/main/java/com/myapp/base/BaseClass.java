@@ -5,12 +5,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.log4j.xml.DOMConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 
 import com.myapp.actiondriver.Action;
 
@@ -23,6 +26,11 @@ public class BaseClass {
 	
 	//Declare ThreadLocal Driver
 	public static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<RemoteWebDriver>();
+	
+	@BeforeSuite
+	public void beforeSuite() {
+		DOMConfigurator.configure("log4j.xml");
+	}
 	
 	public static WebDriver getDriver() {
 		//Get Driver from thread local camp
@@ -42,20 +50,21 @@ public class BaseClass {
 		}
 	}
 	
-	public static void launchApp() {
+	@Parameters("browserName")
+	public static void launchApp(String browserName) {
 		//WebDriverManager.chromedriver().setup();
-		String browserName = prop.getProperty("browser");
+		//String browserName = prop.getProperty("browser");
 		
-		if(browserName.contains("Chrome")) {
+		if(browserName.equalsIgnoreCase("Chrome")) {
 			System.setProperty(browserName, "C:\\Drivers\\chromedriver.exe");
 			//driver = new ChromeDriver();
 			//Set Browser to ThreadLocalCamp
 			driver.set(new ChromeDriver());
-		}else if (browserName.contains("FireFox")) {
+		}else if (browserName.equalsIgnoreCase("FireFox")) {
 			//driver = new FirefoxDriver();
 			//Set Browser to ThreadLocalCamp
 			driver.set(new FirefoxDriver());
-		}else if (browserName.contains("IE")) {
+		}else if (browserName.equalsIgnoreCase("IE")) {
 			//driver = new InternetExplorerDriver();
 			//Set Browser to ThreadLocalCamp
 			driver.set(new InternetExplorerDriver());
