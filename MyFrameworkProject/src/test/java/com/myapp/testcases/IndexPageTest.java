@@ -3,6 +3,7 @@ package com.myapp.testcases;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.myapp.base.BaseClass;
@@ -13,8 +14,8 @@ public class IndexPageTest extends BaseClass {
 	IndexPage indexPage;
 	
 	@BeforeMethod
-	public void setUp(String browser) {
-		launchApp(browser);
+	public void setUp() {
+		launchApp();
 	}
 
 	@Test

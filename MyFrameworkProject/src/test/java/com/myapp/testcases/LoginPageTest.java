@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.myapp.base.BaseClass;
@@ -19,17 +20,18 @@ public class LoginPageTest extends BaseClass{
 	LoginPage loginPage;
 	HomePage homePage;
 	
-	@BeforeMethod
-	public void setUp(String browser) {
-		launchApp(browser);
+	@Parameters("browser")
+	@BeforeMethod (groups= {"Smoke","Sanity","Regression"})
+	public void setUp() {
+		launchApp();
 	}
 	
-	@AfterMethod
+	@AfterMethod (groups= {"Smoke","Sanity","Regression"})
 	public void tearDown() {
 		getDriver().quit();
 	}
 	
-	@Test(dataProvider="credentials", dataProviderClass=DataProviders.class)
+	@Test(dataProvider="credentials", dataProviderClass=DataProviders.class, groups= {"Smoke","Sanity"})
 	public void loginTest(String uname, String pswd) throws Throwable {
 		Log.startTestCase("LoginTest");
 		indexPage = new IndexPage();

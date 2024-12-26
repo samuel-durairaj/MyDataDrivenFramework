@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="Test(failed)">
+  <parameter name="browser" value="HtmlRunner"/>
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.myapp.testcases.LoginPageTest">
+      <class name="com.myapp.testcases.IndexPageTest">
         <methods>
-          <include name="beforeSuite"/>
-          <include name="loginTest" invocation-numbers="1"/>
-          <include name="setUp"/>
-          <include name="loadConfig"/>
+          <include name="verifyTitle"/>
           <include name="tearDown"/>
+          <include name="setUp"/>
+          <include name="verifyLogo"/>
         </methods>
-      </class> <!-- com.myapp.testcases.LoginPageTest -->
+      </class> <!-- com.myapp.testcases.IndexPageTest -->
     </classes>
-  </test> <!-- Test(failed) -->
+  </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
