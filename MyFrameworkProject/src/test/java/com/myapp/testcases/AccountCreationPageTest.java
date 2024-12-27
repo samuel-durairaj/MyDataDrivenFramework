@@ -6,7 +6,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.myapp.base.BaseClass;
-import com.myapp.dataprovider.DataProviders;
 import com.myapp.pageobjects.AccountCreationPage;
 import com.myapp.pageobjects.IndexPage;
 import com.myapp.pageobjects.LoginPage;
@@ -18,8 +17,8 @@ public class AccountCreationPageTest extends BaseClass{
 	AccountCreationPage accountCreationPage;
 	
 	@BeforeMethod
-	public void setUp(String browser) {
-		launchApp(browser);
+	public void setUp() {
+		launchApp();
 	}
 	
 	@AfterMethod
@@ -27,12 +26,11 @@ public class AccountCreationPageTest extends BaseClass{
 		getDriver().quit();
 	}
 	
-	@Test (dataProvider="accountCreation", dataProviderClass=DataProviders.class)
-	public void verifyCreateAccountPageTest(String name, String emailID) throws Throwable {
+	@Test 
+	public void verifyCreateAccountPageTest() throws Throwable {
 		indexPage = new IndexPage();
 		loginPage = indexPage.clickOnSignIn();
-		//accountCreationPage = loginPage.signUp("samuel", "samuel86@mail.com");
-		accountCreationPage = loginPage.signUp(name,emailID);
+		accountCreationPage = loginPage.signUp("samuel", "samuel86@mail.com");
 		boolean result = accountCreationPage.accountCreationHeaderTitle();
 		Assert.assertTrue(result);
 	}

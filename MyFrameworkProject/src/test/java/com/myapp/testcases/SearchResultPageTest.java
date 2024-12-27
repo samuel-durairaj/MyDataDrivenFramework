@@ -19,8 +19,8 @@ public class SearchResultPageTest extends BaseClass{
 	SearchResultPage searchResultPage;
 	
 	@BeforeMethod
-	public void setUp(String browser) {
-		launchApp(browser);
+	public void setUp() {
+		launchApp();
 	}
 	
 	@AfterMethod

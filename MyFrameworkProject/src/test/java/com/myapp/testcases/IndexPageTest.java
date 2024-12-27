@@ -13,8 +13,8 @@ public class IndexPageTest extends BaseClass {
 	IndexPage indexPage;
 	
 	@BeforeMethod
-	public void setUp(String browser) {
-		launchApp(browser);
+	public void setUp() {
+		launchApp();
 	}
 
 	@Test
